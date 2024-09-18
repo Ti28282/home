@@ -5,13 +5,18 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 import asyncio
 from flask_restful import Api
 
+# !.env vars
+import os
+
+
+
 # * Routes
 from .routes import AdminAuth, Admin
 
 # !Settings
 
 AdminService = Flask("Admin")
-
+AdminService.config['API_KEY'] = os.environ.get('API_KEY')
 CORS(AdminService) # *CORS 
 
 
@@ -19,7 +24,7 @@ CORS(AdminService) # *CORS
 
 
 # !configs
-AdminService.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://scott:tiger@localhost/project' # todo os.env("path")
+AdminService.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_PATH') # todo os.env("path")
 AdminService.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
