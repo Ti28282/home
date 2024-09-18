@@ -1,4 +1,4 @@
-
+from .config import login_manager
 import asyncio
 from flask import jsonify , request
 from flask_restful import Resource
@@ -7,6 +7,7 @@ from flask_restful import Resource
 
 
 # * Route Auth
+@login_manager
 class AdminAuth(Resource):
             
         def get(self):
