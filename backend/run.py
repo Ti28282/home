@@ -1,10 +1,10 @@
-from App.services.Admin import AdminService
+from App.services import Admin
 from App.services.Home import HomeService
 
 
 
 
-AdminService.run(debug = True)
+Admin.AdminService.run(debug = True)
 #HomeService.run(debug = True)
 
 
