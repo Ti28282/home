@@ -1,7 +1,7 @@
 import asyncio
 from flask import jsonify , request
 from flask_restful import Resource
-from .models import UsersModel
+from .models import UsersModel , db
 
 
 
@@ -23,8 +23,10 @@ class AdminAuth(Resource):
                 if  not login and not password or login == "" or password == "":
                         return jsonify({"error":"not login or password"})
                 
-                else:
-                        return jsonify({"error":"not data"})
+                else:   
+                        user = UsersModel(login_ = login, password_ = password)
+                        db.session.add(user)
+                        return jsonify({"status":"successfully","message":"Data save"}) 
                 
 
         def delete(self):
