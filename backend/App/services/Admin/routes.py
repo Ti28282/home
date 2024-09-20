@@ -1,6 +1,7 @@
 import asyncio
 from flask import jsonify , request
 from flask_restful import Resource
+from .models import UsersModel
 
 
 
@@ -23,7 +24,14 @@ class AdminAuth(Resource):
                         return jsonify({"error":"not login or password"})
                 
                 else:
-                        return jsonify({"error":"not data"}) 
+                        return jsonify({"error":"not data"})
+                
+
+        def delete(self):
+                # find id or login and delete account
+                data = request.json
+                login = data.get("login")
+                password = data.get("password")
 
 
 # * Route Admin
