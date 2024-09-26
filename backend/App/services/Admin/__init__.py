@@ -5,11 +5,11 @@ from flask import Flask, jsonify, request
 
 from flask_cors  import CORS
 from flask_restful import Api
-
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 
-from .routes import AdminAuth
+ERROR_MESSAGE = "Doesn't exist method "
 
 class EndPoints:
 
@@ -32,6 +32,9 @@ import os
 AdminService.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_PATH') # todo os.env("path")
 AdminService.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# todo Database connect
+db = SQLAlchemy(AdminService) 
+
 # *name routes
 
 LOGIN = EndPoints.LOGIN
@@ -42,8 +45,8 @@ login_manager = LoginManager()
 login_manager.init_app(AdminService)
 login_manager.login_view = EndPoints.LOGIN
 
+from .routes import Auth
 
-# *API
 api = Api(AdminService)
-# Append Routes
-api.add_resource(AdminAuth,LOGIN)
+
+api.add_resource(Auth, "/user/auth")

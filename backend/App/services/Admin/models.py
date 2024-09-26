@@ -1,6 +1,6 @@
-from .config import DataBase
+from . import db
 
-db = DataBase.db
+
 
 
 
@@ -10,8 +10,8 @@ db = DataBase.db
 class Users(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
-    login_ = db.Column(db.String(20), nullable = False, unique = True)
-    password_ = db.Column(db.String(25), nullable = False)
+    login = db.Column(db.String(20), nullable = False, unique = True)
+    password = db.Column(db.String(25), nullable = False)
 
 
     def __repr__(self):
