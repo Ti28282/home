@@ -10,11 +10,11 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 
 
 ERROR_MESSAGE = "Doesn't exist method "
+LOGIN = "/AdminAuth/"
+MAIN = "/"
 
-class EndPoints:
 
-    LOGIN = "/AdminAuth/"
-    MAIN = "/"
+    
 
 # !Settings
 
@@ -35,18 +35,32 @@ AdminService.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # todo Database connect
 db = SQLAlchemy(AdminService) 
 
-# *name routes
+# * DataBase Model
+class Users(db.Model):
 
-LOGIN = EndPoints.LOGIN
+    id = db.Column(db.Integer, primary_key = True)
+    login = db.Column(db.String(20), nullable = False, unique = True)
+    password = db.Column(db.String(25), nullable = False)
+
+
+    def __init__(self, login, password):
+        self.login = login
+        self.password = password
+
+
+    def __repr__(self):
+        return f'<User {self.login}>'
 
 # todo For registered users
 # !Sign In
 login_manager = LoginManager()
 login_manager.init_app(AdminService)
-login_manager.login_view = EndPoints.LOGIN
+login_manager.login_view = LOGIN
 
+
+# API 
 from .routes import Auth
 
 api = Api(AdminService)
 
-api.add_resource(Auth, "/user/auth")
+api.add_resource(Auth, "/user/auth") 
