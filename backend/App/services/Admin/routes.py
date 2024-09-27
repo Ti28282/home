@@ -135,11 +135,3 @@ class Auth(Resource):
                 return jsonify({ERROR:"DB error"})
         else:
             return jsonify({ERROR:"Account didn't find"})
-
-class Login(Resource):
-    """
-    Check Exist user in DB if True upload
-    """
-    
-    def post(self):
-        pass
