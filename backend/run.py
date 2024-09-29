@@ -1,5 +1,5 @@
-from App.services.Admin import AdminService
-from App.services.Home import HomeService
+from App.services import AdminService
+
 
 
 
