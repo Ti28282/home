@@ -1,12 +1,12 @@
 from . import AdminService, db, Users
 from flask_restful import Resource
 from flask import request, jsonify
-
+from .Monitoring import Monitoring
 
 MESSAGE = "Message"
 WARNING = "Warning"
 ERROR = "ERROR"
-
+system = Monitoring()
 
 class Auth(Resource):
     """
@@ -135,3 +135,29 @@ class Auth(Resource):
                 return jsonify({ERROR:"DB error"})
         else:
             return jsonify({ERROR:"Account didn't find"})
+
+class Login(Resource):
+    pass
+
+
+class Systeminfo(Resource):
+    """
+    Return Datas
+    Example: 
+    {
+    'OS':'Name_os',
+    'HOST':'Name_host',
+    'KERNEL':'Version',
+    'UPTIME':'time',
+    'SHELL':'Version',
+    'CPU':'Name_CPU',
+    'GPU':'Name_GPU',
+    'MEMORY':'Memory_PC'
+    }
+    """
+    
+
+    
+    def get(self):
+        # dict return
+        return jsonify(system())

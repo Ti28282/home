@@ -59,8 +59,9 @@ login_manager.login_view = LOGIN
 
 
 # API 
-from .routes import Auth
+from .routes import Auth, Login, Systeminfo
 
 api = Api(AdminService)
 
 api.add_resource(Auth, "/user/auth") 
+api.add_resource(Systeminfo, "/user/systeminfo")
