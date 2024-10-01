@@ -1,7 +1,34 @@
-import React from "react"
-import "./WeatherCss/Visual.css"
+import React, { useEffect, useState } from "react";
+import './WeatherCss/Visual.css';
+import axios from 'axios';
+import getLocationData from './GetLocation';
+import getWeatherData from './GetData'
+
+const apiKey = '3041b9d7a4f212c7efdfce6d19568757';
 
 export default function Weather() {
+    const [location, setLocation] = useState(null);
+    const [weather, setWeather] = useState(null);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+    
+            const locationData = await getLocationData(lat, lon);
+            if (locationData) {
+              const city = locationData.address.city;
+              setLocation(city);
+            }
+    
+            const weatherData = await getWeatherData(lat, lon);
+            if (weatherData) {
+              setWeather(weatherData);
+            }
+          });
+        }
+      }, []);
     
     return(
         <>
@@ -14,21 +41,21 @@ export default function Weather() {
                                 <div className="sun"></div>
                                 <div className="blur_sun"></div>
                             </div>
-                            <div className="temperature">-3°</div>
+                            <div className="temperature">{weather.main.temp}°</div>
                             <div className="temperature_city">
-                                <p className="text text_sity">Казань</p><br />
-                                <p className="text text_weather">Ясно</p><br />
+                                <p className="text text_sity">{location}</p><br />
+                                <p className="text text_weather">{weather.weather[0].description}</p><br />
                                 <div>
-                                    <p className="symbol s1">14°</p>
+                                    <p className="symbol s1">{weather.main.temp_max}°</p>
                                     <p className="symbol s2">/</p>
-                                    <p className="symbol s3">-5°</p>
+                                    <p className="symbol s3">{weather.main.temp_min}°</p>
                                 </div>
                             </div>
                         </div>
                         <div className="weather_conditions">
-                            <div className="conditions precipitation">66%</div>
-                            <div className="conditions humidity">54%</div>
-                            <div className="conditions wind_speed">19 км/ч</div>
+                            <div className="conditions precipitation">%</div>
+                            <div className="conditions humidity">%</div>
+                            <div className="conditions wind_speed"> км/ч</div>
                         </div>
                     </div>
                     <div className="today">
@@ -41,14 +68,14 @@ export default function Weather() {
                                     <div className="frame_today">
                                         <p className="text_time">Сейчас</p>
                                         <div className="icon i0"></div>
-                                        <p className="temp">7°</p>
+                                        <p className="temp">°</p>
                                     </div>
                                 </div>
                                 <div className="time_today">
                                     <div className="frame_today">
                                         <p className="text_time">10:00</p>
                                         <div className="icon i1"></div>
-                                        <p className="temp">8°</p>
+                                        <p className="temp">°</p>
                                     </div>
                                 </div>
                                 <div className="time_today">
@@ -83,7 +110,7 @@ export default function Weather() {
                         </div>
                     </div>
                     <div className="sunrise_sunset">
-                        <div className="ellipse_rise_set"></div>
+                        <div className="ellipse_rise_set">.</div>
                         <div className="img_sunrise"></div>
                         <div className="sunrise">
                             <div className="icon_sunrise"></div>

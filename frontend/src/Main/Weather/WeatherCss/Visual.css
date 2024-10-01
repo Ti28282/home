@@ -13,7 +13,7 @@
         linear-gradient(to bottom, #fff 100%, #000000 100%);
     border: 1px solid black;
     width: 477px;
-    height: 100vh;
+    height: 99.8vh;
     justify-content: center;
     display: flex;
 }
@@ -78,6 +78,10 @@
     position: absolute;
     top: 20px;
     left: 195px;
+}
+
+p {
+    /* margin: 0; */
 }
 
 .temperature {
@@ -298,9 +302,9 @@
 
 .content_day {
     display: flex;
-    width: 40px;
-    height: 119px;
-    padding: 24px 8px;
+    /* width: 53px; */
+    /* height: 169px; */
+    padding: 18px 3px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -435,21 +439,75 @@
 .sunrise_sunset {
     width: 435px;
     height: 183px;
+    /* display: block; */
 }
 
-.ellipse_rise_se {
-    width: 380px;
+.ellipse_rise_set {
+    /* width: 380px; */
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 113px;
     flex-shrink: 0;
-    stroke-width: 3px;
-    stroke: #FFF;
+    background-image: url('../../../../public/Ellipse_white.svg');
 }
 
 .img_sunrise {
+    display: inline-flex;
     background-image: url('../../../../public/Group\ 9333.svg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 85.478px;
     height: 83.116px;
+    flex-shrink: 0;
+    position: relative;
+    bottom: 122px;
+}
+
+.sunrise {
+    display: inline-block;
+    width: 51px;
+    height: 56px;
+    flex-shrink: 0;
+    float: inline-start;
+}
+
+.sunset {
+    display: inline-block;
+    width: 24px;
+    height: 56px;
+    flex-shrink: 0;
+    position: relative;
+    float: inline-end;
+}
+
+.text_sunrise {
+    color: var(--White-0, #FFF);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 14.4px */
+}
+
+.text_sunset {
+    color: var(--White-0, #FFF);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 14.4px */
+}
+
+.icon_sunrise {
+    background-image: url('../../../../public/SunHorizon.svg');
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.icon_sunset {
+    background-image: url('../../../../public/SunHorizon.svg');
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
 }
