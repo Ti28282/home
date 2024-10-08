@@ -11,12 +11,14 @@ export default function Authorization() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post('server', { username, password });
+          const response = await axios.get('http://93.157.248.178:4056/user/auth', { username: inputValue, password: inputPassword });
           const token = response.data.token;
           localStorage.setItem('token', token);
           setIsAuthenticated(true);
+          console.log(inputValue, inputPassword)
         } catch (error) {
           setError(error.response.data.error);
+          console.error(error)
         }
     };
 

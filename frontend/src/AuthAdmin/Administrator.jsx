@@ -11,7 +11,7 @@ export default function Authorization() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post('server', { username, password });
+          const response = await axios.post('http://93.157.248.178:4056/user/auth', { username, password });
           const token = response.data.token;
           localStorage.setItem('token', token);
           setIsAuthenticated(true);

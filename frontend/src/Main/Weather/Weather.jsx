@@ -20,16 +20,17 @@ export default function Weather() {
             if (locationData) {
               const city = locationData.address.city;
               setLocation(city);
+            //   console.log(getLocationData)
             }
     
             const weatherData = await getWeatherData(lat, lon);
             if (weatherData) {
               setWeather(weatherData);
+            //   console.log(getWeatherData)
             }
           });
         }
       }, []);
-    
     return(
         <>
             <div id="container_weather">
@@ -44,11 +45,11 @@ export default function Weather() {
                             <div className="temperature">{weather.main.temp}°</div>
                             <div className="temperature_city">
                                 <p className="text text_sity">{location}</p><br />
-                                <p className="text text_weather">{weather.weather[0].description}</p><br />
+                                <p className="text text_weather"></p><br />
                                 <div>
-                                    <p className="symbol s1">{weather.main.temp_max}°</p>
+                                    <p className="symbol s1">°</p>
                                     <p className="symbol s2">/</p>
-                                    <p className="symbol s3">{weather.main.temp_min}°</p>
+                                    <p className="symbol s3">°</p>
                                 </div>
                             </div>
                         </div>
