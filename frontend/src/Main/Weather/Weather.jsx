@@ -10,19 +10,20 @@ export default function Weather() {
     const [location, setLocation] = useState(null);
     const [weather, setWeather] = useState(null);
 
+    //! Широта | Долгота
     useEffect(() => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-    
+    //! Находит местоположение
             const locationData = await getLocationData(lat, lon);
             if (locationData) {
               const city = locationData.address.city;
               setLocation(city);
             //   console.log(getLocationData)
             }
-    
+    //! Погодные данные
             const weatherData = await getWeatherData(lat, lon);
             if (weatherData) {
               setWeather(weatherData);
@@ -32,7 +33,7 @@ export default function Weather() {
         }
       }, []);
     return(
-        <>
+        <div>
             <div id="container_weather">
                 <div id="container_front_weather">
                     <div className="sun_moon_block">
@@ -42,7 +43,7 @@ export default function Weather() {
                                 <div className="sun"></div>
                                 <div className="blur_sun"></div>
                             </div>
-                            <div className="temperature">{weather.main.temp}°</div>
+                            <div className="temperature">°</div>   {/*{weather.main.temp} */}
                             <div className="temperature_city">
                                 <p className="text text_sity">{location}</p><br />
                                 <p className="text text_weather"></p><br />
@@ -228,6 +229,6 @@ export default function Weather() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

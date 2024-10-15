@@ -22,7 +22,7 @@ export default function SystemUbuntu() {
     }, []);
 
     return(
-        <>
+        <div>
             <div id="container_system">
                 <p className="text_system">Информация о системе</p>
                 <div className="system">
@@ -37,6 +37,6 @@ export default function SystemUbuntu() {
                     <div className="info_system" id="uptime"><p className="name_sys">Uptime:</p>{systemInfo.UPTIME}</div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

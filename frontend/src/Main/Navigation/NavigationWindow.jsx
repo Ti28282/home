@@ -24,7 +24,7 @@ export default function NavigationWindow() {
     }
 
     return(
-        <>
+        <div id='navig_window'>
             <header>
                 <div className="container_header">
                     <div className="avatar_nick_home">
@@ -55,6 +55,6 @@ export default function NavigationWindow() {
                     <button className='but_nav_GPT'>Chat-GPT</button>
                 </div>
             </body>
-        </>
+        </div>
     )
 }
