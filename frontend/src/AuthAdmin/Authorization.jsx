@@ -8,10 +8,12 @@ export default function Authorization() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [showPassword, setShowPassword] = useState()
 
+    const port = 4666
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.get('http://93.157.248.178:4056/user/auth', { username: inputValue, password: inputPassword });
+          const response = await axios.get(`http://93.157.248.178:${port}/user/auth`, { login: inputValue, password: inputPassword });
           const token = response.data.token;
           localStorage.setItem('token', token);
           setIsAuthenticated(true);
@@ -23,7 +25,7 @@ export default function Authorization() {
     };
 
     return (
-        <body>
+        <body id="auth">
             <div id="container_auth">
                 <div className="name_log_pass">
                     <h1>Авторизация</h1>

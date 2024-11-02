@@ -1,57 +1,51 @@
-// import React, {useState, useEffect} from "react";
-
-// export default function Monitoring() {
-//     const [systemInfo, setSystemInfo] = useState({});
-    
-//     const fetchData = () => {
-//         fetch(`http://93.157.248.178:43745/user/dynamicinfo`, {
-//             method: 'GET'
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             setSystemInfo(data);    //Обработка данных: Когда получен ответ API, функция fetchData обрабатывает данные ответа, вызывая метод json() для анализа ответа в формате JSON. Результирующие данные затем сохраняются в переменной состояния systemInfo с помощью функции setSystemInfo.
-//         });
-//     };
-
-
-//     useEffect(() => {
-//         fetchData();
-//         const intervalId = setInterval(fetchData, 1500)
-//         return () => clearInterval(intervalId)
-//     }, []);
-    
-//     return(
-//       <>
-//       </>
-//     )
-// }
 import './Monitoring.css'
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-
+import React from 'react';
+import CPU from './CPU';
+import Ethernet from './Ethernet';
+import RAM from './RAM'
 
 export default function Monitoring() {
-  const [cpuUsage, setCpuUsage] = useState([]);
-  const [internet_speed, setInternet_speed] = useState([])
-  const [memoryUsage, setMemoryUsage] = useState([])
+  // const [data, setData] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+  // const port = 4666;
 
-  const fetchData = () => {
-      fetch(`http://93.157.248.178:43745/user/dynamicinfo`, {
-        method: 'GET'
-    })
-      .then(response => response.json())
-      .then(data => {
-        setCpuUsage(data.cpuUsage)
-        setInternet_speed(data.internet_speed)
-        setMemoryUsage(data.memoryUsage)    //? Обработка данных: Когда получен ответ API, функция fetchData обрабатывает данные ответа, вызывая метод json() для анализа ответа в формате JSON. Результирующие данные затем сохраняются в переменной состояния systemInfo с помощью функции setSystemInfo.
-      });   //* извлечь необходимые данные из ответа API и сохранить их в data переменной состояния.
-  };
+  // Определяем функцию fetchData на уровне компонента
+  // async function fetchData() {
+  //   try {
+  //     const responseCPU = await fetch(`http://93.157.248.178:${port}/user/systeminfo/CPU`);
+  //     if (!responseCPU.ok) {
+  //       throw new Error('Сеть не отвечает');
+  //     }
+  //     const jsonData = await responseCPU.json();
+  //     setData(jsonData);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-      fetchData();
-      const intervalId = setInterval(fetchData, 1500)
-      return () => clearInterval(intervalId)
-  }, []);
+
+  // useEffect(() => {
+  //   fetchData(); // первоначальный вызов
+  //   const intervalId = setInterval(fetchData, 1500); // периодический вызов
+  //   return () => clearInterval(intervalId); // очистка при размонтировании
+  // }, []);
+
+  // if (loading) return <div>Загрузка...</div>;
+  // if (error) return <div>Ошибка: {error}</div>;
+
+  // const cpuData = data.CPU.map((usage, index) => ({
+  //   name: `Точка ${index + 1}`,
+  //   CPU: usage[0] // предполагается, что это значение CPU
+  // }));
+  
+  // const downloadSpeed = [{ 
+  //   name: 'Скорость загрузки',
+  //   Download: data.SPEEDTEST.DOWNLOAD,
+  //   Upload: data.SPEEDTEST.UPLOAD
+  // }]; // предполагается, что это одно значение
 
   return (
     <div>
@@ -59,36 +53,11 @@ export default function Monitoring() {
         <h1>Мониторинг</h1>
         <div className="cpu_ethernet_memory">
           <p className="text_cem">CPU</p>
-          {cpuUsage.length > 0 && (
-            <LineChart width={450} height={265} data={cpuUsage}>
-              <Line type="monotone" dataKey="usage" stroke="#8884d8" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <CartesianGrid stroke="#ccc" />
-              <Tooltip />
-            </LineChart>
-          )}
+            <CPU/>
           <p className="text_cem">Ethernet</p>
-          {internet_speed.length > 0 && (
-            <LineChart width={450} height={265} data={internet_speed}>
-              <Line type="monotone" dataKey="rx_bytes" stroke="#8884d8" />
-              <Line type="monotone" dataKey="tx_bytes" stroke="#82ca9d" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <CartesianGrid stroke="#ccc" />
-              <Tooltip />
-            </LineChart>
-          )}
-          <p className="text_cem">Memory</p>
-          {memoryUsage.length > 0 && (
-            <LineChart width={450} height={265} data={memoryUsage}>
-              <Line type="monotone" dataKey="usage" stroke="#8884d8" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <CartesianGrid stroke="#ccc" />
-              <Tooltip />
-            </LineChart>
-          )}
+            <Ethernet/>
+          <p className="text_cem">RAM</p>
+            <RAM/>
         </div>
       </div>
     </div>

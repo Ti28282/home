@@ -45,6 +45,16 @@
             "backgroundColor": "transparent",
             "bold": false,
             "italic": false
+        },
+        {
+            "tag": "&",
+            "color": "#FAFAFA",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
         }
+        
     ]
 }

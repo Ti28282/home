@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
-import axios from 'axios';
-import getLocationData from './GetLocation';
+import GetLocationData from './GetLocation';
 import getWeatherData from './GetData'
 
-const apiKey = '3041b9d7a4f212c7efdfce6d19568757';
+const apiKey = '24916bfa8a9c438bb14134519242910';
 
 export default function Weather() {
-    const [location, setLocation] = useState(null);
-    const [weather, setWeather] = useState(null);
+    // const [location, setLocation] = useState(null);
+    // const [weather, setWeather] = useState({});
+    // const [loading, setLoading] = useState(true)
 
-    //! Широта | Долгота
-    useEffect(() => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(async (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-    //! Находит местоположение
-            const locationData = await getLocationData(lat, lon);
-            if (locationData) {
-              const city = locationData.address.city;
-              setLocation(city);
-            //   console.log(getLocationData)
-            }
-    //! Погодные данные
-            const weatherData = await getWeatherData(lat, lon);
-            if (weatherData) {
-              setWeather(weatherData);
-            //   console.log(getWeatherData)
-            }
-          });
-        }
-      }, []);
+    /* 
+    temp.toFixed()
+    Темература мин макс 
+    состтояние погоды
+    влажность
+    облачность
+    скорость ветра
+    
+    
+    
+    
+    
+    
+    
+    */
+
+    //   if (loading) {
+    //     return <div>Loading...</div>;
+    // }
+    
+    
+
+    // if (!weather || !location) {
+    //     return <div>Error loading data</div>;
+    //}
+
     return(
         <div>
             <div id="container_weather">
@@ -43,9 +47,9 @@ export default function Weather() {
                                 <div className="sun"></div>
                                 <div className="blur_sun"></div>
                             </div>
-                            <div className="temperature">°</div>   {/*{weather.main.temp} */}
+                            <div className="temperature">°</div>
                             <div className="temperature_city">
-                                <p className="text text_sity">{location}</p><br />
+                                <p className="text text_sity"><GetLocationData/></p><br />
                                 <p className="text text_weather"></p><br />
                                 <div>
                                     <p className="symbol s1">°</p>
@@ -55,16 +59,16 @@ export default function Weather() {
                             </div>
                         </div>
                         <div className="weather_conditions">
-                            <div className="conditions precipitation">%</div>
+                            <div className="conditions precipitation">%</div>  {/*процент облачности*/}
                             <div className="conditions humidity">%</div>
-                            <div className="conditions wind_speed"> км/ч</div>
+                            <div className="conditions wind_speed">км/ч</div>
                         </div>
                     </div>
                     <div className="today">
                         <div className="today_two">
                             <div className="rectangle"></div>
                             <p className="text_day day1">Сегодня</p>
-                            <p className="text_day day2">Сен, 06</p>
+                            <p className="text_day day2"></p>
                             <div className="time_for_today">
                                 <div className="time_today">
                                     <div className="frame_today">
@@ -116,7 +120,7 @@ export default function Weather() {
                         <div className="img_sunrise"></div>
                         <div className="sunrise">
                             <div className="icon_sunrise"></div>
-                            <p className="text_sunrise">6:04</p>
+                            <p className="text_sunrise"></p>
                             <p className="text_sunrise">Восход</p>
                         </div>
                         <div className="sunset">

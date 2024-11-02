@@ -48,8 +48,8 @@
     font-style: normal;
     color: white;
     line-height: 1px;
-    border-bottom: 1px solid #525252;
-    padding: 50px 0px 10px 0px;
+    border-bottom: 1px solid #000000;
+    padding: 46px 0px 10px 0px;
 }
 
 .img_ubuntu {
@@ -59,4 +59,8 @@
     background-position: 0px;
     opacity: 0.14;
     left: 50px;
+}
+
+#ping {
+    border-bottom: none;
 }
