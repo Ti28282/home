@@ -39,10 +39,11 @@ export default function Ethernet() {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
-    fetchData(); // Первоначальный вызов
-    const intervalId = setInterval(fetchData, 10000); // Периодический вызов
+    const intervalId = setInterval(() => {
+      fetchData() // Первоначальный вызов
+    }, 5000); // Периодический вызов
     return () => clearInterval(intervalId); // Очистка при размонтировании
   }, []);
 
@@ -52,12 +53,12 @@ export default function Ethernet() {
 
   return (
     <div>
-      <ResponsiveContainer width={450} height={275}>
+      <ResponsiveContainer width={450} height={270}>
         <LineChart data={data}>
-          <Line type="monotone" dataKey="Download" stroke="#B0C4DE" strokeWidth={3} activeDot={{ r: 5 }} />
-          <Line type="monotone" dataKey="Upload" stroke="#BC8F8F" strokeWidth={3} activeDot={{ r: 5 }} />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <Line type="monotone" dot={false} isAnimationActive={false} dataKey="Download" stroke="#B0C4DE" strokeWidth={3} activeDot={{ r: 5 }} />
+          <Line type="monotone" dot={false} isAnimationActive={false} dataKey="Upload" stroke="#BC8F8F" strokeWidth={3} activeDot={{ r: 5 }} />
+          {/* <XAxis dataKey="name" /> */}
+          <YAxis stroke='#fff' />
           <Tooltip />
           {/* <Legend /> */}
           <CartesianGrid stroke="#ccc" />

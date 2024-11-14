@@ -7,10 +7,6 @@
 }
 
 #container_weather {
-    background: 
-        linear-gradient(#508acd56 100%, #508acd00 50%),
-        linear-gradient(to bottom, #9adbef 25%,#000000 100%),
-        linear-gradient(to bottom, #fff 100%, #000000 100%);
     border: none;
     border-left:1px #000000 solid ;
     border-right:1px #000000 solid ;
@@ -19,6 +15,20 @@
     height: 100%;
     justify-content: center;
     display: flex;
+}
+
+.container_weather_day {
+    background: 
+        linear-gradient(#508acd56 100%, #508acd00 50%),
+        linear-gradient(to bottom, #9adbef 25%,#000000 100%),
+        linear-gradient(to bottom, #fff 100%, #000000 100%);
+}
+
+.container_weather_night {
+    background: 
+        linear-gradient(#1f1f429d 100%, #1F1F42 50%),
+        linear-gradient(to top, #000000 40%,#a9a9ff 100%),
+        linear-gradient(to top, #fff 100%, #000000 100%);
 }
 
 #container_front_weather {
@@ -38,6 +48,7 @@
 
 .weather_day {
     display: inline-flex;
+    text-align: center;
     padding: 0px 81px;
     flex-direction: column;
     justify-content: center;
@@ -90,6 +101,7 @@ p {
 }
 
 .temperature {
+    margin-left: 10px;
     color: var(--White-0, #FFF);
     text-align: center;
     font-family: Inter;
@@ -105,7 +117,6 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 117px;
     height: 0px;
     margin-top: 40px;
     line-height: 13px;

@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import './NavigationWindow.css';
 import axios from 'axios';
+// import Setting from '../Modal/Setting.';
+import Modal from 'react-modal'
 
 export default function NavigationWindow() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [userAvatar, setUserAvatar] = useState(''); // default avatar URL
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+    setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+    setModalIsOpen(false);
+    };
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -45,7 +56,11 @@ export default function NavigationWindow() {
                     <div className="func_head_sett">
                         <input type="button" className="exit"/>
                         <div className='setting_container'>
-                            <input type="button" className="setting"/>
+                            <input type="button" className="setting" onClick={openModal}/>
+                            <Modal portalClassName="modal" id='container_setting' isOpen={modalIsOpen} onRequestClose={closeModal}>
+                                    <h1>Окно готово</h1>
+                            </Modal>
+                            <img src="../../../public/icons8-settings-48.svg" alt="" className='setting_img'/>
                         </div>
                     </div>
                 </div>
