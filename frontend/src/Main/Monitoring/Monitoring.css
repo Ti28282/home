@@ -5,10 +5,6 @@
 }
 
 #container_monitoring {
-    background: 
-        linear-gradient(#508acd56 100%, #508acd00 50%),
-        linear-gradient(to bottom, #9adbef 25%,#000000 100%),
-        linear-gradient(to bottom, #fff 100%, #000000 100%);
     width: 474px;
     height: 100%;
     border-right: 1px #000000 solid;

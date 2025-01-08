@@ -1,31 +1,41 @@
 import { useState } from "react"
 import axios from "axios"
 import './AuAdCss/Autho.css'
+import { useAuth } from "../AuthContext"
+import { useNavigate } from "react-router-dom"
+
 export default function Authorization() {
     const [inputValue, setInputValue] = useState('')
     const [inputPassword, setInputPassword] = useState('')
     const [error, setError] = useState(null)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const { setIsAuthenticated } = useAuth();
     const [showPassword, setShowPassword] = useState()
+    const navigate = useNavigate();
 
     const port = 4666
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.get(`http://93.157.248.178:${port}/user/auth`, { login: inputValue, password: inputPassword });
-          const token = response.data.token;
-          localStorage.setItem('token', token);
-          setIsAuthenticated(true);
-          console.log(inputValue, inputPassword)
+            const response = await axios.post(`http://93.157.248.178:${port}/user/auth`, { login: inputValue, password: inputPassword });
+            const token = response.data.access_token;
+
+            if (token) {
+                localStorage.setItem('access_token', token);
+                setIsAuthenticated(true);
+                setError(null); // Сброс ошибки при успешной аутентификации
+                navigate('/home')
+            } else {
+                setError('Не удалось получить токен');
+            }
         } catch (error) {
-          setError(error.response.data.error);
-          console.error(error)
+            setError(error.response?.data?.error || 'Произошла ошибка при авторизации');
+            console.error(error);
         }
     };
 
     return (
-        <body id="auth">
+        <div id="auth">
             <div id="container_auth">
                 <div className="name_log_pass">
                     <h1>Авторизация</h1>
@@ -42,9 +52,9 @@ export default function Authorization() {
                         <button type="submit" className="autho_button">Войти</button>
                     </form>
                     {error && <div style={{color: 'red'}}>{error}</div>}
-                    {isAuthenticated && <div>Вы авторизовались</div>}
+                    {setIsAuthenticated}
                 </div>
             </div>
-        </body>
+        </div>
     )
 }

@@ -1,32 +1,29 @@
 import Authorization from './AuthAdmin/Authorization'
 import Site from './Main/Site/Site'
 import Admin from './AuthAdmin/Administrator'
-import { BrowserRouter, Link, Route, Routes} from 'react-router-dom'
+import React from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import PrivateRoute from './PrivateRoute';
+import { AuthProvider } from './AuthContext';
 
-export default function App() {
+const App = observer(() => {  
 
-    return(
-        <BrowserRouter>
-            {/* <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Site</Link>
-                    </li>
-                    <li>
-                        <Link to="/authorization">Authorization</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact">Contact</Link>
-                    </li>
-                </ul>
-            </nav> */}
-            <main>
+    return (
+        <AuthProvider>
+            <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Authorization />}/>
-                    <Route path="/home" element={<Site />} />
-                    <Route path="/admin" element={<Admin />} />
+                    <Route id='auth' path="/" element={<Authorization />}/>
+                    <Route element={<PrivateRoute />}> 
+                        <Route id='site' path="/home" element={<Site />} />
+                    </Route>
+                    <Route element={<PrivateRoute />}> 
+                        <Route id='site' path="/admin" element={<Admin />} />
+                    </Route>
                 </Routes>
-            </main>
-        </BrowserRouter>
-    )
-}
+            </BrowserRouter>
+        </AuthProvider>
+    );
+});
+
+export default App

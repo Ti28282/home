@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
-
-// const apiKey = '24916bfa8a9c438bb14134519242910';
+import './WeatherCss/Sunvis.css'
 
 export default function Weather() {
-    const [weatherData, setWeatherData] = useState(null);
+    const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const port = 4666
-    /* 
-    temp.toFixed()
-    Темература мин макс 
-    состтояние погоды
-    влажность
-    облачность
-    скорость ветра
-    
-    
-    
-    
-    
-    
-    
-    */  
 
     const fetchWeatherData = async () => {
         try {
@@ -65,6 +49,7 @@ export default function Weather() {
             return 'container_weather_night'; // Ночной фон
         }
     };
+
 
 
     return(

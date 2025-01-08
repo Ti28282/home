@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import './SysUb.css';
+import BackgroundProvider from '../Weather/BackgroundContext';
 
 const IP = "93.157.248.178"
 const PORT = 4666
@@ -25,7 +26,7 @@ export default function SystemUbuntu() {
     }, []);
 
     return(
-        <div>
+        <BackgroundProvider>
             <div id="container_system">
                 <p className="text_system">Информация о системе</p>
                 <div className="system">
@@ -41,6 +42,6 @@ export default function SystemUbuntu() {
                     <div className="info_system" id="ping"><p className="name_sys">PING:</p>{systemInfo.PING}</div>
                 </div>
             </div>
-        </div>
+        </BackgroundProvider>
     )
 }

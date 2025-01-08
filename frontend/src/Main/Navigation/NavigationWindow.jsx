@@ -3,6 +3,7 @@ import './NavigationWindow.css';
 import axios from 'axios';
 // import Setting from '../Modal/Setting.';
 import Modal from 'react-modal'
+import BackgroundContextNav from './BackgroundContextNav.jsx'
 
 export default function NavigationWindow() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -35,7 +36,7 @@ export default function NavigationWindow() {
     }
 
     return(
-        <div id='navig_window'>
+        <BackgroundContextNav>
             <header>
                 <div className="container_header">
                     <div className="avatar_nick_home">
@@ -70,6 +71,6 @@ export default function NavigationWindow() {
                     <button className='but_nav_GPT'>Chat-GPT</button>
                 </div>
             </body>
-        </div>
+        </BackgroundContextNav>
     )
 }

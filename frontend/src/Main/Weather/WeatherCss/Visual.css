@@ -17,7 +17,7 @@
     display: flex;
 }
 
-.container_weather_day {
+/* .container_weather_day {
     background: 
         linear-gradient(#508acd56 100%, #508acd00 50%),
         linear-gradient(to bottom, #9adbef 25%,#000000 100%),
@@ -29,7 +29,7 @@
         linear-gradient(#1f1f429d 100%, #1F1F42 50%),
         linear-gradient(to top, #000000 40%,#a9a9ff 100%),
         linear-gradient(to top, #fff 100%, #000000 100%);
-}
+} */
 
 #container_front_weather {
     display: inline-flex;
