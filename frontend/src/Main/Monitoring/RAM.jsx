@@ -33,24 +33,25 @@ export default function ResponseRAM() {
   };
 
   useEffect(() => {
-    fetchData(); // первоначальный вызов
-    const intervalId = setInterval(fetchData, 5000); // периодический вызов
-    return () => clearInterval(intervalId); // очистка при размонтировании
+    const intervalId = setInterval(() => {
+      fetchData() // Первоначальный вызов
+    }, 5000); // Периодический вызов
+    return () => clearInterval(intervalId); // Очистка при размонтировании
   }, []);
 
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
-    <ResponsiveContainer width={450} height={275}>
+    <ResponsiveContainer width={450} height={270}>
       <LineChart data={data}>
         <CartesianGrid  />
-        <XAxis dataKey="name" />
-        <YAxis />
+        {/* <XAxis dataKey="name" /> */}
+        <YAxis stroke='#fff' />
         <Tooltip />
         {/* <Legend /> */}
         <ReferenceLine y={0} stroke="#fff" />
-        <Line type="monotone" dataKey="RAM" stroke="#ADFF2F" strokeWidth={3} activeDot={{ r: 5 }} />
+        <Line type="monotone" dot={false} isAnimationActive={false} dataKey="RAM" stroke="#ADFF2F" strokeWidth={3} activeDot={{ r: 5 }} />
       </LineChart>
     </ResponsiveContainer>
   );

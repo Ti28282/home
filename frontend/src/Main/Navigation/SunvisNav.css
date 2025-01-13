@@ -1,0 +1,21 @@
+.container_nav_day {
+    background: 
+        linear-gradient(#6189b7d0 100%, #6189b700 0%),
+        linear-gradient(59deg,#000000 35%, #ffffff 0%);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.container_nav_night {
+    background: 
+        linear-gradient(#6189b7d0 100%, #6189b700 0%),
+        linear-gradient(59deg,#000000 35%, #ffffff 0%);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}

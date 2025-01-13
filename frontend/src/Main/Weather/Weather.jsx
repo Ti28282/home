@@ -1,44 +1,60 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
-import GetLocationData from './GetLocation';
-import getWeatherData from './GetData'
-
-const apiKey = '24916bfa8a9c438bb14134519242910';
+import './WeatherCss/Sunvis.css'
 
 export default function Weather() {
-    // const [location, setLocation] = useState(null);
-    // const [weather, setWeather] = useState({});
-    // const [loading, setLoading] = useState(true)
+    const [weatherData, setWeatherData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const port = 4666
 
-    /* 
-    temp.toFixed()
-    Темература мин макс 
-    состтояние погоды
-    влажность
-    облачность
-    скорость ветра
-    
-    
-    
-    
-    
-    
-    
-    */
+    const fetchWeatherData = async () => {
+        try {
+            const response = await fetch(`http://93.157.248.178:${port}/user/weather`);
+            if (!response.ok) {
+                throw new Error('Ошибка сети');
+            }
+            const data = await response.json();
+            setWeatherData(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    //   if (loading) {
-    //     return <div>Loading...</div>;
-    // }
-    
-    
+    useEffect(() => {
+        fetchWeatherData(); // Первоначальный вызов
+        const intervalId = setInterval(() => {
+            fetchWeatherData(); // Периодический вызов
+        }, 300000); // Обновление каждые 60 секунд 
+        return () => clearInterval(intervalId); // Очистка
+    }, []); // Пустой массив зависимостей, чтобы выполнить только один раз
 
-    // if (!weather || !location) {
-    //     return <div>Error loading data</div>;
-    //}
+    if (loading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка: {error}</div>;
+
+    function formatTime(timeStamp) {
+        return new Date(timeStamp * 1000).toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
+    }
+
+    const sunrise = formatTime(weatherData.sys.sunrise);
+    const sunset = formatTime(weatherData.sys.sunset);
+
+    const getBackgroundClass = () => {
+        const now = new Date();
+        if (now >= sunrise && now < sunset) {
+            return 'container_weather_day'; // Дневной фон
+        } else {
+            return 'container_weather_night'; // Ночной фон
+        }
+    };
+
+
 
     return(
         <div>
-            <div id="container_weather">
+            <div id="container_weather" className={getBackgroundClass()}>
                 <div id="container_front_weather">
                     <div className="sun_moon_block">
                         <div className="weather_day">
@@ -47,21 +63,21 @@ export default function Weather() {
                                 <div className="sun"></div>
                                 <div className="blur_sun"></div>
                             </div>
-                            <div className="temperature">°</div>
+                            <div className="temperature">{weatherData.main.temp.toFixed()}°</div>
                             <div className="temperature_city">
-                                <p className="text text_sity"><GetLocationData/></p><br />
-                                <p className="text text_weather"></p><br />
+                                <p className="text text_sity">{weatherData.name}</p><br />
+                                <p className="text text_weather">{weatherData.weather[0].description}</p><br />
                                 <div>
-                                    <p className="symbol s1">°</p>
+                                    <p className="symbol s1">{Math.floor(weatherData.main.temp_min)}°</p>
                                     <p className="symbol s2">/</p>
-                                    <p className="symbol s3">°</p>
+                                    <p className="symbol s3">{Math.ceil(weatherData.main.temp_max)}°</p>
                                 </div>
                             </div>
                         </div>
                         <div className="weather_conditions">
-                            <div className="conditions precipitation">%</div>  {/*процент облачности*/}
-                            <div className="conditions humidity">%</div>
-                            <div className="conditions wind_speed">км/ч</div>
+                            <div className="conditions precipitation">{weatherData.clouds.all}%</div>  {/*процент облачности*/}
+                            <div className="conditions humidity">{weatherData.main.humidity}%</div>
+                            <div className="conditions wind_speed">{weatherData.wind.speed}км/ч</div>
                         </div>
                     </div>
                     <div className="today">
@@ -74,7 +90,7 @@ export default function Weather() {
                                     <div className="frame_today">
                                         <p className="text_time">Сейчас</p>
                                         <div className="icon i0"></div>
-                                        <p className="temp">°</p>
+                                        <p className="temp">{weatherData.main.temp.toFixed()}°</p>
                                     </div>
                                 </div>
                                 <div className="time_today">
@@ -120,12 +136,12 @@ export default function Weather() {
                         <div className="img_sunrise"></div>
                         <div className="sunrise">
                             <div className="icon_sunrise"></div>
-                            <p className="text_sunrise"></p>
+                            <p className="text_sunrise">{sunrise}</p>
                             <p className="text_sunrise">Восход</p>
                         </div>
                         <div className="sunset">
                             <div className="icon_sunset"></div>
-                            <p className="text_sunset">19:04</p>
+                            <p className="text_sunset">{sunset}</p>
                             <p className="text_sunset">Закат</p>
                         </div>
                     </div>
