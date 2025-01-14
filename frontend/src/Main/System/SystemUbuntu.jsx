@@ -1,32 +1,39 @@
-import React, {useState, useEffect} from "react";
+import  {useState, useEffect} from "react";
 import './SysUb.css';
 import BackgroundProvider from '../Weather/BackgroundContext';
+import  { ADDRESS } from "../Config";
+import axios from "axios";
 
-const IP = "93.157.248.178"
-const PORT = 4666
+
+
 
 export default function SystemUbuntu() {
     const [systemInfo, setSystemInfo] = useState({});
     
     
     const fetchData = () => {
-        fetch(`http://${IP}:${PORT}/user/systeminfo`, {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(data => {
-            setSystemInfo(data);    // todo Обработка данных: Когда получен ответ API, функция fetchData обрабатывает данные ответа, вызывая метод json() для анализа ответа в формате JSON. Результирующие данные затем сохраняются в переменной состояния systemInfo с помощью функции setSystemInfo.
-        });
+            axios.get(`${ADDRESS}/user/systeminfo`).then((response) => {
+                
+                setSystemInfo(response.data)})
+            
+            //.catch((error) => {error})
+            
+            // todo Обработка данных: Когда получен ответ API, функция fetchData обрабатывает данные ответа, вызывая метод json() для анализа ответа в формате JSON. Результирующие данные затем сохраняются в переменной состояния systemInfo с помощью функции setSystemInfo.
+            
+        
+        
     };
     
     useEffect(() => {
         fetchData();
-        const intervalId = setInterval(fetchData, 1000)
+        const intervalId = setInterval(fetchData, 2680)
         return () => clearInterval(intervalId)
     }, []);
-
-    return(
+    // todo ERROR WINDOW
+    
+    return(<>
         <BackgroundProvider>
+        
             <div id="container_system">
                 <p className="text_system">Информация о системе</p>
                 <div className="system">
@@ -42,6 +49,8 @@ export default function SystemUbuntu() {
                     <div className="info_system" id="ping"><p className="name_sys">PING:</p>{systemInfo.PING}</div>
                 </div>
             </div>
+        
         </BackgroundProvider>
+        </>
     )
 }

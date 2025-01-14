@@ -3,6 +3,8 @@ import axios from "axios"
 import './AuAdCss/Autho.css'
 import { useAuth } from "../AuthContext"
 import { useNavigate } from "react-router-dom"
+import { ADDRESS } from "../Main/Config"
+
 
 export default function Authorization() {
     const [inputValue, setInputValue] = useState('')
@@ -12,16 +14,17 @@ export default function Authorization() {
     const [showPassword, setShowPassword] = useState()
     const navigate = useNavigate();
 
-    const port = 4666
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`http://93.157.248.178:${port}/user/auth`, { login: inputValue, password: inputPassword });
+            const response = await axios.post(`${ADDRESS}/user/auth`, { login: inputValue, password: inputPassword });
             const token = response.data.access_token;
-
+            
             if (token) {
-                localStorage.setItem('access_token', token);
+                localStorage.setItem('token', token);
+                
                 setIsAuthenticated(true);
                 setError(null); // Сброс ошибки при успешной аутентификации
                 navigate('/home')

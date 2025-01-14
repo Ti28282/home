@@ -1,5 +1,6 @@
 import React, {useState, useEffect, createContext, Children} from "react";
-import './WeatherCss/Sunvis.css'
+import '../Weather/Sun'
+import { Token_Fetch_CONFIG } from "../Config";
 
 const BackgroundProvider = ({children}) => {
     const [weatherData, setWeatherData] = useState([]);
@@ -9,7 +10,7 @@ const BackgroundProvider = ({children}) => {
 
     const fetchWeatherData = async () => {
         try {
-            const response = await fetch(`http://93.157.248.178:${port}/user/weather`);
+            const response = await fetch(`http://93.157.248.178:${port}/user/weather`, Token_Fetch_CONFIG);
             if (!response.ok) {
                 throw new Error('Ошибка сети');
             }

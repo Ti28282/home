@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import axios from 'axios';
+import { ADDRESS } from '../Config';
 
 
 export default function CPU() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const port = 4666;
+  
+  
 
   // Определяем функцию fetchData на уровне компонента
   async function fetchData() {
     try {
-        const responseCPU = await fetch(`http://93.157.248.178:${port}/user/systeminfo/CPU`);
-        if (!responseCPU.ok) {
-          throw new Error('Сеть не отвечает');
-        }
-          const jsonData = await responseCPU.json()
-          // console.log(jsonData)
+        const responseCPU = await axios.get(`${ADDRESS}/user/systeminfo/CPU`)
+        
+        
+        
+          const jsonData = await responseCPU.data
+          
+          
           const newDataPoint = {
             name: new Date().toLocaleTimeString(), // Добавляем временную метку
             CPU: jsonData.CPU[1][0], // данные парсятся
