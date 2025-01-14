@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ADDRESS, Token_Fetch_CONFIG } from '../Config';
+import axios from 'axios';
 
+// ! NEED AXIOS 
 export default function Ethernet() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const port = 4666;
+  
 
   const fetchData = async () => {
     try {
       const requests = [
-        fetch(`http://93.157.248.178:${port}/user/systeminfo/DOWNLOAD`),
-        fetch(`http://93.157.248.178:${port}/user/systeminfo/UPLOAD`)
-      ];
+        fetch(`${ADDRESS}/user/systeminfo/DOWNLOAD`,Token_Fetch_CONFIG),fetch(`${ADDRESS}/user/systeminfo/UPLOAD`,Token_Fetch_CONFIG)
+      ]
 
+      //const requests = [
+       // axios.get(`${ADDRESS}/user/systeminfo/DOWNLOAD`),
+      //  axios.get(`${ADDRESS}/user/systeminfo/UPLOAD`)
+      //]
       const responses = await Promise.all(requests);
       
       // Проверка, все ли ответы в порядке

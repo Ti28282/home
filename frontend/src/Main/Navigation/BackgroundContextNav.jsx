@@ -1,15 +1,16 @@
 import React, {useState, useEffect, createContext, Children} from "react";
 import './SunvisNav.css'
+import { ADDRESS } from "../Config";
 
 const BackgroundProvider = ({children}) => {
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const port = 4666
+    
 
     const fetchWeatherData = async () => {
         try {
-            const response = await fetch(`http://93.157.248.178:${port}/user/weather`);
+            const response = await fetch(`${ADDRESS}/user/weather`, {headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}});
             if (!response.ok) {
                 throw new Error('Ошибка сети');
             }

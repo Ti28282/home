@@ -6,9 +6,9 @@ import Modal from 'react-modal'
 import BackgroundContextNav from './BackgroundContextNav.jsx'
 
 export default function NavigationWindow() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [userAvatar, setUserAvatar] = useState(''); // default avatar URL
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+    //const [selectedFile, setSelectedFile] = useState(null);
+    //const [userAvatar, setUserAvatar] = useState(''); // default avatar URL
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
     setModalIsOpen(true);
@@ -17,24 +17,24 @@ export default function NavigationWindow() {
     const closeModal = () => {
     setModalIsOpen(false);
     };
+{/*
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+};
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const handleUpload = () => {
+const handleUpload = () => {
     const formData = new FormData();
     formData.append('avatar', selectedFile);
 
     axios.post('server', formData)
-      .then((response) => {
+    .then((response) => {
         setUserAvatar(response.data.avatarUrl); // update the user's avatar URL
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.error(error);
-      });
+    });
     }
-
+*/}
     return(
         <BackgroundContextNav>
             <header>
@@ -44,7 +44,7 @@ export default function NavigationWindow() {
                             <div className="avatar">
                                 {/* <button onClick={handleUpload} className='button_avatar'>Upload Avatar</button> */}
                                 {/* <input type="file" onChange={handleFileChange} className='file_type'/> */}
-                                <img src={userAvatar} className='avatar_img'/>
+                                {/*<img src={userAvatar} className='avatar_img'/>*/}
                             </div>
                             <div className='line l1'></div>
                             <div className="nickname">Nickname</div>

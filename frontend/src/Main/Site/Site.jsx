@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+
 import Weather from '../Weather/Weather.jsx';
 import NavigationWindow from '../Navigation/NavigationWindow.jsx';
 import Monitoring from '../Monitoring/Monitoring.jsx';

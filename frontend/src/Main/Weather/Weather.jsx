@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
 import './WeatherCss/Sunvis.css'
+import { ADDRESS, Token_Fetch_CONFIG } from "../Config";
 
 export default function Weather() {
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const port = 4666
+    
 
     const fetchWeatherData = async () => {
         try {
-            const response = await fetch(`http://93.157.248.178:${port}/user/weather`);
+            const response = await fetch(`${ADDRESS}/user/weather`, Token_Fetch_CONFIG);
             if (!response.ok) {
                 throw new Error('Ошибка сети');
             }
