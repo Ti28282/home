@@ -10,8 +10,8 @@ export default function Site() {
     return(
         <div id="system_site">
             <div id="container">
-                <NavigationWindow/>
-                <Weather/>
+                {/* <NavigationWindow/> */}
+                {/* <Weather/> */}
                 <Monitoring/>
                 <SystemUbuntu/>
             </div>

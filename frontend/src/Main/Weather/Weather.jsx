@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
-import './WeatherCss/Sunvis.css'
+import './WeatherCss/Sunvis.css';
+import axios from "axios";
+import { useAuth } from "../../AuthContext";
 
 export default function Weather() {
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const port = 4666
+    const { token } = useAuth()
 
-    const fetchWeatherData = async () => {
-        try {
-            const response = await fetch(`http://93.157.248.178:${port}/user/weather`);
-            if (!response.ok) {
-                throw new Error('Ошибка сети');
+    const WeatherMain = async () => {
+        try{
+            const weathmain = await axios.get(`http://93.157.248.178:${port}/user/weather`, {
+            headers: { 
+                'Authorization': `Bearer ${token}` 
             }
-            const data = await response.json();
-            setWeatherData(data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
+            });
+            const data = weathmain.data
+            console.log(weathmain)
+            setWeatherData(data)
+        } catch (error) {
+            console.error(error)
+            setLoading(false)
+            setError(error.message)
         }
-    };
+    }
 
     useEffect(() => {
-        fetchWeatherData(); // Первоначальный вызов
+        WeatherMain(); // Первоначальный вызов
         const intervalId = setInterval(() => {
-            fetchWeatherData(); // Периодический вызов
+            WeatherMain(); // Периодический вызов
         }, 300000); // Обновление каждые 60 секунд 
         return () => clearInterval(intervalId); // Очистка
     }, []); // Пустой массив зависимостей, чтобы выполнить только один раз
