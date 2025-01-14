@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import axios from "axios";
 import React, {useState, useEffect, createContext, children} from "react";
 import './WeatherCss/Sunvis.css'
 import { useAuth } from '../../AuthContext'
+=======
+import React, {useState, useEffect, createContext, Children} from "react";
+import '../Weather/Sun'
+import { Token_Fetch_CONFIG } from "../Config";
+>>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
 
 const BackgroundProvider = ({children}) => {
     const [weatherData, setWeatherData] = useState([]);
@@ -10,11 +16,19 @@ const BackgroundProvider = ({children}) => {
     const { token } = useAuth();
     const port = 4666
 
+<<<<<<< HEAD
     const WeatherData = async () => {
         try{
             const weather = await axios.get(`http://93.157.248.178:${port}/user/weather`, {
             headers: { 
                 'Authorization': `Bearer ${token}` 
+=======
+    const fetchWeatherData = async () => {
+        try {
+            const response = await fetch(`http://93.157.248.178:${port}/user/weather`, Token_Fetch_CONFIG);
+            if (!response.ok) {
+                throw new Error('Ошибка сети');
+>>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
             }
             });
             const data = weather.data

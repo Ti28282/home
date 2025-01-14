@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { ADDRESS } from '../Config';
 
 export default function ResponseRAM() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const port = 4666;
+  
 
   const fetchData = async () => {
     try {
+<<<<<<< HEAD
       const responseRAM = await fetch(`http://93.157.248.178:${port}/user/systeminfo/RAM`, {headers: {'Authorization': `Bearer ${token}`}});
+=======
+      const responseRAM = await fetch(`${ADDRESS}/user/systeminfo/RAM`, {headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+>>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
       if (!responseRAM.ok) {
         throw new Error('Сеть не отвечает');
       }

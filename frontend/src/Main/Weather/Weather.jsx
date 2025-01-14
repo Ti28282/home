@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
+<<<<<<< HEAD
 import './WeatherCss/Sunvis.css';
 import axios from "axios";
 import { useAuth } from "../../AuthContext";
+=======
+import './WeatherCss/Sunvis.css'
+import { ADDRESS, Token_Fetch_CONFIG } from "../Config";
+>>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
 
 export default function Weather() {
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+<<<<<<< HEAD
     const port = 4666
     const { token } = useAuth()
 
@@ -16,6 +22,15 @@ export default function Weather() {
             const weathmain = await axios.get(`http://93.157.248.178:${port}/user/weather`, {
             headers: { 
                 'Authorization': `Bearer ${token}` 
+=======
+    
+
+    const fetchWeatherData = async () => {
+        try {
+            const response = await fetch(`${ADDRESS}/user/weather`, Token_Fetch_CONFIG);
+            if (!response.ok) {
+                throw new Error('Ошибка сети');
+>>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
             }
             });
             const data = weathmain.data
