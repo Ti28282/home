@@ -10,13 +10,9 @@ import Site from './Main/Site/Site';
 // import CPU from './Main/Monitoring/CPU';
 createRoot(document.getElementById('root')).render(
   <>
-<<<<<<< HEAD
 
     <App />
     {/* <CPU /> */}
-=======
-    <App></App>
->>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
     {/* <Authorization/> */}
   </>
 )

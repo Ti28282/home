@@ -16,13 +16,8 @@ export default function Authorization() {
     const [showPassword, setShowPassword] = useState()
     const navigate = useNavigate();
 
-<<<<<<< HEAD
     const port = 4666
     
-=======
-    
-
->>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -30,13 +25,8 @@ export default function Authorization() {
             const token = response.data.access_token;
             
             if (token) {
-<<<<<<< HEAD
                 localStorage.setItem('access_token', token);
                 setToken(token)
-=======
-                localStorage.setItem('token', token);
-                
->>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
                 setIsAuthenticated(true);
                 setError(null); // Сброс ошибки при успешной аутентификации
                 navigate('/home')

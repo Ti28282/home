@@ -10,11 +10,7 @@ export default function ResponseRAM() {
 
   const fetchData = async () => {
     try {
-<<<<<<< HEAD
       const responseRAM = await fetch(`http://93.157.248.178:${port}/user/systeminfo/RAM`, {headers: {'Authorization': `Bearer ${token}`}});
-=======
-      const responseRAM = await fetch(`${ADDRESS}/user/systeminfo/RAM`, {headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}});
->>>>>>> e29b037f0922d2147d2b1eaf56c14eff69414c90
       if (!responseRAM.ok) {
         throw new Error('Сеть не отвечает');
       }
