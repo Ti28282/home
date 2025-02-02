@@ -1,44 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ADDRESS, Token_Fetch_CONFIG } from '../Config';
+import { ADDRESS } from '../Config';
 import axios from 'axios';
 
-// ! NEED AXIOS 
 export default function Ethernet() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-
-  const fetchData = async () => {
+  const EthernetData = async () => {
     try {
       const requests = [
-        fetch(`${ADDRESS}/user/systeminfo/DOWNLOAD`,Token_Fetch_CONFIG),fetch(`${ADDRESS}/user/systeminfo/UPLOAD`,Token_Fetch_CONFIG)
-      ]
-
-      //const requests = [
-       // axios.get(`${ADDRESS}/user/systeminfo/DOWNLOAD`),
-      //  axios.get(`${ADDRESS}/user/systeminfo/UPLOAD`)
-      //]
-      const responses = await Promise.all(requests);
+        axios.get(`${ADDRESS}/user/systeminfo/DOWNLOAD`), 
+        axios.get(`${ADDRESS}/user/systeminfo/UPLOAD`)
+      ];
       
-      // Проверка, все ли ответы в порядке
-      responses.forEach((response) => {
-        if (!response.ok) {
-          throw new Error('Сеть не отвечает');
-        }
-      });
+      const responses = await Promise.all(requests); //Todo возвращает промис, который выполнится тогда, когда будут выполнены все промисы, переданные в виде перечисляемого аргумента, или отклонено любое из переданных промисов.
+      
+      const downloadData = responses[0].data;
+      const uploadData = responses[1].data;
 
-      const jsonData = await Promise.all(responses.map(response => response.json()));
+      if (!downloadData || !uploadData || !downloadData.DOWNLOAD || !uploadData.UPLOAD) {
+        throw new Error('Ошибка');
+      }
+
       const newDataPoint = {
-        name: new Date().toLocaleTimeString(), // Добавляем временную метку
-        Download: jsonData[0].DOWNLOAD[0], // Отрегулируйте в соответствии со структурой ответов вашего API
-        Upload: jsonData[1].UPLOAD[0]    // Отрегулируйте в соответствии со структурой ответов вашего API
+        name: new Date().toLocaleTimeString(), //Todo Добавляем временную метку
+        Download: downloadData.DOWNLOAD[0], //Todo Отрегулируйте в соответствии со структурой ответов вашего API
+        Upload: uploadData.UPLOAD[0], //Todo Отрегулируйте в соответствии со структурой ответов вашего API
       };
 
-      // console.log(newDataPoint); // Логируем новую точку данных
-
-      setData(prevData => [...prevData, newDataPoint]); // Добавляем новую точку данных
+      setData(prevData => {
+        const updateDataEthernet = [...prevData, newDataPoint] //Todo Добавление новой точки
+        return updateDataEthernet.slice(-10)
+      }); 
     } catch (error) {
       setError(error.message);
     } finally {
@@ -48,9 +43,9 @@ export default function Ethernet() {
   
   useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchData() // Первоначальный вызов
-    }, 5000); // Периодический вызов
-    return () => clearInterval(intervalId); // Очистка при размонтировании
+      EthernetData() //* Первоначальный вызов
+    }, 5000); //* Периодический вызов
+    return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 
   if (loading) return <div>Загрузка...</div>;

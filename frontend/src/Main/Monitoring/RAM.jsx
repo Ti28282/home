@@ -1,43 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { ADDRESS } from '../Config';
+import axios from 'axios';
 
 export default function ResponseRAM() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-
-  const fetchData = async () => {
+  const RamData = async () => {
     try {
-      const responseRAM = await fetch(`${ADDRESS}/user/systeminfo/RAM`, {headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}});
-      if (!responseRAM.ok) {
-        throw new Error('Сеть не отвечает');
+        const responseRAM = await axios.get(`${ADDRESS}/user/systeminfo/RAM`)
+        const jsonData = responseRAM.data
+      //Todo Предполагается, что jsonData - это объект с полем RAM
+        const newDataPoint = {
+          name: new Date().toLocaleTimeString(),
+          RAM: jsonData.RAM,
+      //Todo Добавьте дополнительные значения, если у вас есть
+          minRAM: jsonData.minRAM, //* минимальное значение RAM
+          maxRAM: jsonData.maxRAM  //* максимальное значение RAM
+        };
+        setData(prevData => {
+          const updateDataRAM = [...prevData, newDataPoint]
+          return updateDataRAM.slice(-10)
+        }); //берёт текущий data создаёт новый массив в котором есть старые точки и добовляет к ним новые
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
-      const jsonData = await responseRAM.json();
-      
-      // Предполагается, что jsonData - это объект с полем RAM
-      const newDataPoint = {
-        name: new Date().toLocaleTimeString(),
-        RAM: jsonData.RAM,
-        // Добавьте дополнительные значения, если у вас есть
-        minRAM: jsonData.minRAM, // минимальное значение RAM
-        maxRAM: jsonData.maxRAM  // максимальное значение RAM
-      };
-      
-      setData(prevData => [...prevData, newDataPoint]);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+    };
+    
   useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchData() // Первоначальный вызов
-    }, 5000); // Периодический вызов
-    return () => clearInterval(intervalId); // Очистка при размонтировании
+      RamData() //* Первоначальный вызов
+    }, 5000); //* Периодический вызов
+    return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 
   if (loading) return <div>Загрузка...</div>;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './WeatherCss/Visual.css';
 import './WeatherCss/Sunvis.css'
-import { ADDRESS, Token_Fetch_CONFIG } from "../Config";
+import { ADDRESS } from "../Config";
+import axios from "axios";
 
 export default function Weather() {
     const [weatherData, setWeatherData] = useState([]);
@@ -9,14 +10,12 @@ export default function Weather() {
     const [error, setError] = useState(null);
     
 
-    const fetchWeatherData = async () => {
+    const WeatherData = async () => {
         try {
-            const response = await fetch(`${ADDRESS}/user/weather`, Token_Fetch_CONFIG);
-            if (!response.ok) {
-                throw new Error('Ошибка сети');
-            }
-            const data = await response.json();
-            setWeatherData(data);
+            await axios.get(`${ADDRESS}/user/weather`).then((response) => {
+
+            setWeatherData(response.data);
+        })
         } catch (err) {
             setError(err.message);
         } finally {
@@ -25,12 +24,12 @@ export default function Weather() {
     };
 
     useEffect(() => {
-        fetchWeatherData(); // Первоначальный вызов
+        WeatherData(); //* Первоначальный вызов
         const intervalId = setInterval(() => {
-            fetchWeatherData(); // Периодический вызов
-        }, 300000); // Обновление каждые 60 секунд 
-        return () => clearInterval(intervalId); // Очистка
-    }, []); // Пустой массив зависимостей, чтобы выполнить только один раз
+            WeatherData(); //* Периодический вызов
+        }, 300000); //* Обновление каждые 60 секунд 
+        return () => clearInterval(intervalId); //* Очистка
+    }, []); //Todo Пустой массив зависимостей, чтобы выполнить только один раз
 
     if (loading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка: {error}</div>;
@@ -45,9 +44,9 @@ export default function Weather() {
     const getBackgroundClass = () => {
         const now = new Date();
         if (now >= sunrise && now < sunset) {
-            return 'container_weather_day'; // Дневной фон
+            return 'container_weather_day'; //* Дневной фон
         } else {
-            return 'container_weather_night'; // Ночной фон
+            return 'container_weather_night'; //* Ночной фон
         }
     };
 
@@ -78,7 +77,7 @@ export default function Weather() {
                         <div className="weather_conditions">
                             <div className="conditions precipitation">{weatherData.clouds.all}%</div>  {/*процент облачности*/}
                             <div className="conditions humidity">{weatherData.main.humidity}%</div>
-                            <div className="conditions wind_speed">{weatherData.wind.speed}км/ч</div>
+                            <div className="conditions wind_speed">{weatherData.wind.speed}м/с</div>
                         </div>
                     </div>
                     <div className="today">

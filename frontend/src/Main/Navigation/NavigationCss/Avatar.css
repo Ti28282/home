@@ -1,0 +1,11 @@
+.contauner_avatar {
+    display: block;
+    position: relative;
+}
+.default_avatar {
+    background-size: cover;
+    width: 30%;
+    margin-left: 35%;
+    justify-content: center;
+    align-items: center;
+}

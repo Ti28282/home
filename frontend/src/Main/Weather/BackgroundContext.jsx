@@ -1,35 +1,31 @@
 import React, {useState, useEffect, createContext, Children} from "react";
-import '../Weather/Sun'
-import { Token_Fetch_CONFIG } from "../Config";
+import '../Weather/WeatherCss/Sunvis.css'
+import { ADDRESS } from "../Config";
+import axios from "axios";
 
 const BackgroundProvider = ({children}) => {
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const port = 4666
 
-    const fetchWeatherData = async () => {
+    const WeatherData = async () => {
         try {
-            const response = await fetch(`http://93.157.248.178:${port}/user/weather`, Token_Fetch_CONFIG);
-            if (!response.ok) {
-                throw new Error('Ошибка сети');
-            }
-            const data = await response.json();
-            setWeatherData(data);
-        } catch (err) {
-            setError(err.message);
+            await axios.get(`${ADDRESS}/user/weather`)
+            .then((response) => { setWeatherData(response.data) })
+        } catch(error) {
+            setError(error)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
     };
 
     useEffect(() => {
-        fetchWeatherData(); // Первоначальный вызов
+        WeatherData(); //* Первоначальный вызов
         const intervalId = setInterval(() => {
-            fetchWeatherData(); // Периодический вызов
-        }, 300000); // Обновление каждые 60 секунд 
-        return () => clearInterval(intervalId); // Очистка
-    }, []); // Пустой массив зависимостей, чтобы выполнить только один раз
+            WeatherData(); //* Периодический вызов
+        }, 300000); //* Обновление каждые 60 секунд 
+        return () => clearInterval(intervalId); //* Очистка
+    }, []); //Todo Пустой массив зависимостей, чтобы выполнить только один раз
 
     if (loading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка: {error}</div>;
@@ -44,9 +40,9 @@ const BackgroundProvider = ({children}) => {
 
     const getBackgroundClass = () => {
         if (now >= sunrise && now < sunset) {
-            return 'container_weather_day'; // Дневной фон
+            return 'container_weather_day'; //* Дневной фон
         } else {
-            return 'container_weather_night'; // Ночной фон
+            return 'container_weather_night'; //* Ночной фон
         }
     };
     return (

@@ -11,22 +11,15 @@ export default function SystemUbuntu() {
     const [systemInfo, setSystemInfo] = useState({});
     
     
-    const fetchData = () => {
-            axios.get(`${ADDRESS}/user/systeminfo`).then((response) => {
+    const SysUbuntuData = () => {
+        axios.get(`${ADDRESS}/user/systeminfo`).then((response) => {
                 
-                setSystemInfo(response.data)})
-            
-            //.catch((error) => {error})
-            
-            // todo Обработка данных: Когда получен ответ API, функция fetchData обрабатывает данные ответа, вызывая метод json() для анализа ответа в формате JSON. Результирующие данные затем сохраняются в переменной состояния systemInfo с помощью функции setSystemInfo.
-            
-        
-        
+            setSystemInfo(response.data)})
     };
     
     useEffect(() => {
-        fetchData();
-        const intervalId = setInterval(fetchData, 2680)
+        SysUbuntuData();
+        const intervalId = setInterval(SysUbuntuData, 3000)
         return () => clearInterval(intervalId)
     }, []);
     // todo ERROR WINDOW

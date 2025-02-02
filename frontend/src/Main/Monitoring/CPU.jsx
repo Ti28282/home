@@ -9,10 +9,7 @@ export default function CPU() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  
-
-  // Определяем функцию fetchData на уровне компонента
-  async function fetchData() {
+  const CpuData = async () => {
     try {
         const responseCPU = await axios.get(`${ADDRESS}/user/systeminfo/CPU`)
         
@@ -22,11 +19,14 @@ export default function CPU() {
           
           
           const newDataPoint = {
-            name: new Date().toLocaleTimeString(), // Добавляем временную метку
-            CPU: jsonData.CPU[1][0], // данные парсятся
+            name: new Date().toLocaleTimeString(), //Todo Добавляем временную метку
+            CPU: jsonData.CPU[1][0], //Todo данные парсятся
         };
 
-        setData(prevData => [...prevData, newDataPoint]); //берёт текущий data создаёт новый массив в котором есть старые точки и добовляет к ним новые
+        setData(prevData => {
+          const updateDataCPU = [...prevData, newDataPoint] //Todo берёт текущий data создаёт новый массив в котором есть старые точки и добовляет к ним новые
+          return updateDataCPU.slice(-10)
+        }); 
       } catch (error) {
         setError(error.message);
       } finally {
@@ -37,9 +37,9 @@ export default function CPU() {
 
     useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchData() // Первоначальный вызов
-    }, 5000); // Периодический вызов
-    return () => clearInterval(intervalId); // Очистка при размонтировании
+      CpuData() //* Первоначальный вызов
+    }, 5000); //* Периодический вызов
+    return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 
   if (loading) return <div>Загрузка...</div>;

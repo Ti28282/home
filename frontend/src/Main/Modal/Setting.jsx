@@ -5,7 +5,11 @@ export default function Setting() {
     
     return(
         <div id="container_setting">
-            <h1>Окно готово</h1>
+            <div>
+                <input className="choice_avatar" type="file" />
+                <button className="button_avatar">Сменить аватар</button>
+            </div>
+
         </div>
     )
 };

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import axios from "axios"
+import { ADDRESS } from "../Main/Config"
 import './AuAdCss/Admin.css'
+
 export default function Authorization() {
     const [inputValue, setInputValue] = useState('')
     const [inputPassword, setInputPassword] = useState('')
@@ -13,7 +15,7 @@ export default function Authorization() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post(`http://93.157.248.178:${port}/user/auth`, { username, password });
+          const response = await axios.post(`${ADDRESS}/user/auth`, { username, password });
           const token = response.data.token;
           localStorage.setItem('token', token);
           setIsAuthenticated(true);

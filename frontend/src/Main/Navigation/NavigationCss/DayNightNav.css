@@ -11,8 +11,9 @@
 
 .container_nav_night {
     background: 
-        linear-gradient(#6189b7d0 100%, #6189b700 0%),
-        linear-gradient(59deg,#000000 35%, #ffffff 0%);
+        linear-gradient(#3333749d 100%, #1F1F42 50%),
+        linear-gradient(to top, #000000 40%,#a9a9ff 100%),
+        linear-gradient(to top, #fff 100%, #000000 100%);
     display: flex;
     flex-direction: column;
     height: 100vh;

@@ -19,7 +19,7 @@
     font-weight: bold;
     font-style: normal;
     color: white;
-    border-bottom:1px solid #525252;
+    border-bottom:1px solid #000000;
     padding: 20px 0px 16px 0px;
 }
 
@@ -30,7 +30,7 @@
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
-    color: #353535;
+    color: #ffffff;
     margin-bottom: 40px;
     padding-right: 10px;
 }
