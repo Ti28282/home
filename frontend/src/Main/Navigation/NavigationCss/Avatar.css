@@ -4,8 +4,9 @@
 }
 .default_avatar {
     background-size: cover;
-    width: 30%;
-    margin-left: 35%;
+    border-radius: 100%;
+    width: 37%;
+    margin-left: 30%;
     justify-content: center;
     align-items: center;
 }

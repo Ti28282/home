@@ -27,7 +27,7 @@ export default function Weather() {
         WeatherData(); //* Первоначальный вызов
         const intervalId = setInterval(() => {
             WeatherData(); //* Периодический вызов
-        }, 300000); //* Обновление каждые 60 секунд 
+        }, 60000); //* Обновление каждые 60 секунд 
         return () => clearInterval(intervalId); //* Очистка
     }, []); //Todo Пустой массив зависимостей, чтобы выполнить только один раз
 

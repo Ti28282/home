@@ -56,8 +56,8 @@ export default function Ethernet() {
     <div>
       <ResponsiveContainer width={450} height={270}>
         <LineChart data={data}>
-          <Line type="monotone" dot={false} isAnimationActive={false} dataKey="Download" stroke="#B0C4DE" strokeWidth={3} activeDot={{ r: 5 }} />
-          <Line type="monotone" dot={false} isAnimationActive={false} dataKey="Upload" stroke="#BC8F8F" strokeWidth={3} activeDot={{ r: 5 }} />
+          <Line type="monotone" dot={false} isAnimationActive={true} dataKey="Download" stroke="#B0C4DE" strokeWidth={3} activeDot={{ r: 5 }} />
+          <Line type="monotone" dot={false} isAnimationActive={true} dataKey="Upload" stroke="#BC8F8F" strokeWidth={3} activeDot={{ r: 5 }} />
           {/* <XAxis dataKey="name" /> */}
           <YAxis stroke='#fff' />
           <Tooltip />

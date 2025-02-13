@@ -5,3 +5,104 @@
     width: 917px;
     height: 423px;
 }
+
+#setting {
+    display: flex;
+    width: 390px;
+    height: 60px;
+    background-color: #ffffff49;
+    border: 1px rgba(255, 255, 255, 0.61) solid;
+    border-radius: 10px;
+}
+
+.choice_avatar {
+    width: 350px;
+    max-width: 100%;
+    color: #ffffff00;
+    padding: 5px;
+}
+
+.choice_avatar::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    width: 200px;
+    background: #084cdf;
+    padding: 17px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+.choice_avatar::file-selector-button:hover {
+    background: #0d45a5;
+}
+
+.button_avatar {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  top: 5px;
+  right: 24px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button_avatar::after,
+.button_avatar::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.button_avatar::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #28282d;
+  border-radius: 10px;
+}
+
+.button_avatar::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.button_avatar:hover::before {
+  transform: translate(5%, 5%);
+  width: 110%;
+  height: 110%;
+}
+
+.button_avatar:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.button_avatar:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}

@@ -9,12 +9,21 @@ import axios from "axios";
 
 export default function SystemUbuntu() {
     const [systemInfo, setSystemInfo] = useState({});
-    
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     
     const SysUbuntuData = () => {
-        axios.get(`${ADDRESS}/user/systeminfo`).then((response) => {
-                
-            setSystemInfo(response.data)})
+        try {
+            axios.get(`${ADDRESS}/user/systeminfo`).then((response) => {
+              setSystemInfo(response.data)  
+            })
+            
+        } catch {
+            setError(error.message)
+        } finally {
+            setLoading(false)
+        }
+        
     };
     
     useEffect(() => {

@@ -49,8 +49,9 @@ export default function CPU() {
     <div>
         <ResponsiveContainer width={450} height={270}>
             <LineChart data={data}>
-              <Line type="monotone" dot={false} isAnimationActive={false} dataKey="CPU" stroke="#9370DB" strokeWidth={3} activeDot={{ r: 5 }}/>
+              <Line type="monotone" dot={false} isAnimationActive={true} dataKey="CPU" stroke="#9370DB" strokeWidth={3} activeDot={{ r: 5 }}/>
               {/* <XAxis dataKey="name" /> */}
+              {/* <Legend /> */}
               <YAxis stroke='#fff'/>
               <CartesianGrid stroke="#fff" />
               <Tooltip />

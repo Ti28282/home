@@ -50,7 +50,7 @@ export default function ResponseRAM() {
         <Tooltip />
         {/* <Legend /> */}
         <ReferenceLine y={0} stroke="#fff" />
-        <Line type="monotone" dot={false} isAnimationActive={false} dataKey="RAM" stroke="#ADFF2F" strokeWidth={3} activeDot={{ r: 5 }} />
+        <Line type="monotone" dot={false} isAnimationActive={true} dataKey="RAM" stroke="#ADFF2F" strokeWidth={3} activeDot={{ r: 5 }} />
       </LineChart>
     </ResponsiveContainer>
   );

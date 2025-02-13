@@ -16,15 +16,21 @@ export default function AvatarUpLoader() {
         })
         } catch(error) {
             setError(error.message);
-              console.log(err)
         } finally {
             setLoading(false);
-              console.log(loading)
         }
       
     }
     AvatarData();
+
+    const intervalId = setInterval(() => {
+      AvatarData();
+    }, 1000);
+    //todo Функция очистки: для очистки интервала при размонтировании компонента
+    return () => clearInterval(intervalId);
   }, []) // todo Пустой массив зависимостей означает, что это выполняется один раз при монтировании компонента
+
+  
   
   if (loading) {
     return <div>Loading...</div>;
@@ -35,8 +41,7 @@ export default function AvatarUpLoader() {
   }
   //! Преобразовывает base64 в src
   // todo смотрит пусто ли avatarDataImg
-  const imageSrc = avatarDataImg ? `data:image/png;base64,${avatarDataImg.img}` : null
-  
+  const imageSrc = avatarDataImg ? avatarDataImg.img : null
   return (
     <div className='container_avatar'>
       {imageSrc ? (
