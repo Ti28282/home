@@ -38,7 +38,7 @@ export default function CPU() {
     useEffect(() => {
     const intervalId = setInterval(() => {
       CpuData() //* Первоначальный вызов
-    }, 5000); //* Периодический вызов
+    }, 1000); //* Периодический вызов
     return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 

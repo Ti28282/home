@@ -1,14 +1,13 @@
 import { createRoot } from 'react-dom/client';
 import React from 'react';
 import App from './App'
-// import Site from './Main/Site/Site';
-// import Authorization from './AuthAdmin/Authorization';
-// import Site from './Main/Site/Site'
-// import AdminPanel from './Admin/AdminPanel';
+import Site from './Main/Site/Site';
+// import LoadingSite from './Loading/WebsiteLoading';
 
 createRoot(document.getElementById('root')).render(
   <>
+    {/* <LoadingSite></LoadingSite> */}
     <App></App>
-    {/* <Authorization/> */}
+    {/* <Site /> */}
   </>
 )

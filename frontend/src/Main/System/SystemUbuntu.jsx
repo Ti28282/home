@@ -28,7 +28,7 @@ export default function SystemUbuntu() {
     
     useEffect(() => {
         SysUbuntuData();
-        const intervalId = setInterval(SysUbuntuData, 3000)
+        const intervalId = setInterval(SysUbuntuData, 1000)
         return () => clearInterval(intervalId)
     }, []);
     // todo ERROR WINDOW

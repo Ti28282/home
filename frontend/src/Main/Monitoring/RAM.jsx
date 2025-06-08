@@ -34,7 +34,7 @@ export default function ResponseRAM() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       RamData() //* Первоначальный вызов
-    }, 5000); //* Периодический вызов
+    }, 1000); //* Периодический вызов
     return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 

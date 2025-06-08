@@ -44,7 +44,7 @@ export default function Ethernet() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       EthernetData() //* Первоначальный вызов
-    }, 5000); //* Периодический вызов
+    }, 1000); //* Периодический вызов
     return () => clearInterval(intervalId); //* Очистка при размонтировании
   }, []);
 
