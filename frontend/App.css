@@ -1,0 +1,193 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1a1f36;
+  color: #f1f5f9;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1e1f2f;
+  padding: 1.5rem;
+  height: 100vh;
+}
+
+.menu {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.menu li {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.menu li.active {
+  color: #4ade80;
+}
+
+.menu li:hover {
+  color: #60a5fa;
+}
+
+.user-info {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  background-color: #3b82f6;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #1a1f36;
+  overflow-y: auto;
+}
+
+.card {
+  background-color: #1e293b;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.blue {
+  color: #60a5fa;
+}
+
+.yellow {
+  color: #facc15;
+}
+
+.green {
+  color: #4ade80;
+}
+
+.indigo {
+  color: #818cf8;
+}
+
+.purple {
+  color: #a855f7;
+}
+
+.teal {
+  color: #14b8a6;
+}
+
+.graph {
+  margin-bottom: 1rem;
+}
+
+.graph-title {
+  display: block;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.progress-bg {
+  background-color: #334155;
+  height: 0.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.progress-bar.blue {
+  background-color: #60a5fa;
+}
+
+.progress-bar.green {
+  background-color: #4ade80;
+}
+
+/* Right Sidebar */
+.sidebar-right {
+  width: 20rem;
+  background-color: #1e293b;
+  padding: 2rem;
+  border-left: 1px solid #334155;
+}
+
+.weather-card {
+  background-color: #334155;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.weather-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.temperature {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.location {
+  font-size: 1rem;
+  color: #cbd5e1;
+}
+
+.weather-details p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
