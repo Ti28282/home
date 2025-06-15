@@ -1,12 +1,13 @@
 import { createRoot } from 'react-dom/client';
 import React from 'react';
-import App from './src/App.jsx'
-import SystemInfo from './src/SystemInfo.jsx';
+import App from './src/website/App.jsx'
+import LoginPage from './src/auth/loginPage.jsx';
+import RegPage from './src/auth/regPage.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <>
-    {/* <SystemInfo /> */}
-    <App />
+    <LoginPage />
+    {/* <RegPage /> */}
   </>
 )

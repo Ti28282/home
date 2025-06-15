@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./App.scss";
-import SystemInfo from "./SystemInfo";
+import SystemInfo from "./systemInfo.jsx";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,7 +27,7 @@ function App() {
           </ul>
           <div className="user-info">
             <div className="avatar">JD</div>
-            <span>John Doe</span>
+            <span className="email">John Doe</span>
           </div>
         </nav>
         <SystemInfo isSidebarOpen={isSidebarOpen}/>
@@ -35,7 +35,7 @@ function App() {
         <aside className="sidebar-right">
           <div className="weather-card">
             <h2>Погода</h2>
-            <div className="weather-icon">☀️</div>
+            <div className="weather-icon">🌧️</div>
             <div className="temperature">+20°C</div>
             <div className="location">Москва</div>
             <div className="weather-details">

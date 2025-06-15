@@ -1,14 +1,14 @@
 import React from "react";
-import './SystemInfo.scss'
+import './systemInfo.scss'
 
-function SystemInfo({isSidebarOpen, hideCardOnMobile}) {
+function systemInfo({isSidebarOpen}) {
     return(
         <>
             {/* Основной контент */}
             <main className="main-content">
                 <section>
                     {/* Информация об устройстве */}
-                    <div className={`card ${hideCardOnMobile ? 'hide-on-mobile' : ''}`}>
+                    <div className={`card ${isSidebarOpen ? 'sidebar-open' : ''}`}>
                         <h2>Информация об устройстве</h2>
                         <div className="info-item">
                             <span className="label">RAM</span>
@@ -55,4 +55,4 @@ function SystemInfo({isSidebarOpen, hideCardOnMobile}) {
         </>
     )
 }
-export default SystemInfo;
+export default systemInfo;
