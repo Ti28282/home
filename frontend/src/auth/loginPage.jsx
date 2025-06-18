@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import './stylePage.scss'
-import { SquishyBox } from "../squishyBox";
+import { Link } from "react-router-dom";
+import { SquishyBox } from "../components/SquishyBox.jsx";
+import { AuthContext } from "../components/AuthContext";
 
-function loginPage() {
+function LoginPage() {
+    const { login } = useContext(AuthContext);
+
+    const handleSubmit = (e) => {
+        //<> Здесь должна быть логика проверки учетных данных
+        //<> Если успешно, вызываем login()
+        e.preventDefault();
+        login()
+    }
 
     return(
         <SquishyBox>
             <div className="login-container">
                 <h2>Войти</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email или логин</label>
                         <input type="text" id="email" placeholder="Введите email или логин" required />
@@ -20,10 +30,10 @@ function loginPage() {
                     <button type="submit">Войти</button>
                 </form>
                 <div className="footer"> Нет аккаунта?
-                    <a href="#"> Зарегистрироваться</a>
+                    <Link to="/register"> Зарегистрироваться</Link>
                 </div>
             </div>
         </SquishyBox>
     )
 }
-export default loginPage;
+export default LoginPage;

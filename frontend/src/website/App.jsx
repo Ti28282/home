@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./App.scss";
 import SystemInfo from "./systemInfo.jsx";
+import { Outlet } from "react-router";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -44,6 +45,8 @@ function App() {
             </div>
           </div>
         </aside>
+        {/* //? Контейнер для вложенных маршрутов */}
+        <Outlet />
       </div>
     );
 }

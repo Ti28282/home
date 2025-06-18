@@ -1,13 +1,13 @@
-import { createRoot } from 'react-dom/client';
 import React from 'react';
-import App from './src/website/App.jsx'
-import LoginPage from './src/auth/loginPage.jsx';
-import RegPage from './src/auth/regPage.jsx'
+import ReactDOM from 'react-dom/client';
+import RoutePage from './src/RoutePage';
+import { AuthProvider } from './src/Components/AuthContext';
 
-
-createRoot(document.getElementById('root')).render(
-  <>
-    <LoginPage />
-    {/* <RegPage /> */}
-  </>
-)
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <AuthProvider>
+            <RoutePage />
+        </AuthProvider>
+    </React.StrictMode>
+);
