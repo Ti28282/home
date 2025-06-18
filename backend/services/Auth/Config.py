@@ -1,18 +1,22 @@
+from dotenv import load_dotenv
+from backend.services.Auth.app import app
 from os import environ
-from backend.main import auth
-
+load_dotenv()
 
 # !configs
-auth.config['SECRET_KEY'] = environ.get("SECRET_KEY")
 
-# * JWT TOKENS
-auth.config['JWT_SECRET_KEY'] =  'L3jCQcKRZJ1jqTS4rC1UHEieMCuljN862qzaTYFg70E'
-auth.config['JWT_TOKEN_LOCATION'] = False
+class Config:
+    SECRET_KEY = environ.get("SECRET_KEY")
+    DEBUG = True
 
+    # * JWT TOKENS
+    JWT_SECRET_KEY = environ.get("JWT_SECRET_KEY")
+    JWT_TOKEN_LOCATION = False
 
-# * DataBase
-auth.config['SQLALCHEMY_DATABASE_URI'] = "" # todo os.env("path")
-auth.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # * DataBase
+    SQLALCHEMY_DATABASE_URI = environ.get("PATH_PSQL")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 
 
