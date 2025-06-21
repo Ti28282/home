@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 .env
 uv.lock
+pyproject.toml
 .venv
 # C extensions
 *.so
