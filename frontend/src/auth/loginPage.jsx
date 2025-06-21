@@ -20,7 +20,7 @@ function LoginPage() {
                 <h2>Войти</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="email">Email или логин</label>
+                        <label htmlFor="email">Логин</label>
                         <input type="text" id="email" placeholder="Введите email или логин" required />
                     </div>
                     <div className="form-group">

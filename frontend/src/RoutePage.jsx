@@ -13,6 +13,8 @@ const PrivateRoute = ({ children }) => {
     const {isAuthenticated} = useContext(AuthContext);
     return isAuthenticated ? children : <Navigate to="/login" />
 }
+console.log(LoginPage)
+console.log(RegPage)
 
 function RoutePage() {
     return(
