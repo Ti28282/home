@@ -2,7 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.env
+uv.lock
+pyproject.toml
+.venv
 # C extensions
 *.so
 .vscode/

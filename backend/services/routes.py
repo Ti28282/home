@@ -1,10 +1,10 @@
 
 
-from . import limiter
+# from . import limiter
 from flask import request, jsonify
-from .Monitoring import Monitoring, Monitoring_CPU, Monitoring_RAM, Monitoring_SpeedtestDownload , Monitoring_SpeedtestUpload
+# from .Monitoring import Monitoring, Monitoring_CPU, Monitoring_RAM, Monitoring_SpeedtestDownload , Monitoring_SpeedtestUpload
 
-from .models import db, Users, AdminUsers, bcrypt # * Update Database
+# from .models import db, Users, AdminUsers, bcrypt # * Update Database
 import os
 
 
@@ -18,7 +18,7 @@ MESSAGE = "Message"
 WARNING = "Warning"
 ERROR = "ERROR"
 
-system = Monitoring()
+# system = Monitoring()
 
 
 
@@ -35,7 +35,7 @@ singup_model = {
 
 class Console(Resource):
 
-    @limiter.limit("5 per minute")
+    # @limiter.limit("5 per minute")
     def get(self):
         
         os.system("clear")
@@ -57,14 +57,14 @@ class Login(Resource):
         _password = req_data.get("password")
 
 
-        user_exists = Users.query.filter_by(login = _login).first()
+        # user_exists = Users.query.filter_by(login = _login).first()
 
-        if user_exists:
+        # if user_exists:
 
-            return jsonify({MESSAGE:{"status":True,"JWT_TOKEN":user_exists.jwt_auth_active}})
+        #     return jsonify({MESSAGE:{"status":True,"JWT_TOKEN":user_exists.jwt_auth_active}})
 
 
-
+'''
 class Register(Resource):
 
     @marshal_with(singup_model)
@@ -75,11 +75,11 @@ class Register(Resource):
         _login = req_data.get("login")
         _password = req_data.get("password")
 
-        user_exists = Users.query.filter_by(login = _login).first()
+        # user_exists = Users.query.filter_by(login = _login).first()
         
 
-        if user_exists and user_exists.check_password(user_exists, _password):
-            return jsonify({ERROR:{"status":False,"message":"Login already taken"}}), 400
+        # if user_exists and user_exists.check_password(user_exists, _password):
+            # return jsonify({ERROR:{"status":False,"message":"Login already taken"}}), 400
         
         
 
@@ -319,3 +319,4 @@ class SpeedTestUpload(Resource):
     def get(self):
 
         return jsonify(Monitoring_SpeedtestUpload())
+'''
